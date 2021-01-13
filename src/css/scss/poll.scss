@@ -1,0 +1,41 @@
+.poll-options-wrapper {
+    margin-top: 0.5rem;
+}
+
+.poll-meter {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    height: 40px;
+    padding: 0.5rem;
+    border-radius: 2px;
+
+    border: 1px solid $base-color-light-shade;
+}
+
+.poll-meter.voted {
+    border: 1px solid $secondary-color;
+}
+
+.poll-meter.active:hover {
+    background-color: $base-color-light-shade;
+    cursor: pointer;
+}
+
+.poll-meter.active.selected {
+    background-color: $base-color-light-shade;
+}
+
+.poll-meter-meter {
+    position: absolute;
+    height: 38px;
+    background-color: $base-color-light-shade;
+
+    margin-top: -39px;
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.poll-meter-meter.voted {
+    background-color: $secondary-color;
+}
