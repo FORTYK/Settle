@@ -26,7 +26,7 @@
     "sweetalert2": "^10.10.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "react": "react-scripts start",
     "scss": "sass --watch ./src/css/scss/main.scss ./src/css/main.css",
     "build": "react-scripts build",
