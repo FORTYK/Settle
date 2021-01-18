@@ -6,7 +6,6 @@ import { withCookies, Cookies } from "react-cookie";
 import MainNav from "./components/MainNav";
 import CookieBanner from "./components/CookieBanner";
 
-import Poll from "./page/Poll";
 import Pomo from "./page/Pomo";
 
 import "bootstrap/dist/css/bootstrap.min.css";

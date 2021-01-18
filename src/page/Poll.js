@@ -27,8 +27,7 @@ class Poll extends Component {
     load() {
         const { cookies } = this.props;
 
-        axios.get("http://localhost:3000/api/poll/0", { withCredentials: true }).then((response) => {
-            console.log("data", response.data);
+        axios.get("http://api/poll/0", { withCredentials: true }).then((response) => {
             let data = response.data;
             if (data.success) {
                 data = data.data;

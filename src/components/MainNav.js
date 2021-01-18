@@ -36,7 +36,11 @@ class MainNav extends Component {
                     <div className="row no-gutters">
                         <div className={"col-12 py-3" + (small ? " small" : "")}>
                             <nav className={"navbar p-0 sticky-top navbar-light"}>
-                                <a className="navbar-brand main-navbar-brand d-flex align-items-center" href="#">
+                                <a
+                                    id="settle"
+                                    className="navbar-brand main-navbar-brand d-flex align-items-center"
+                                    href="#settle"
+                                >
                                     <img src={SettleLogo} className="tilt ease-transition" alt="" loading="lazy" />
                                     <span className="ease-transition ml-2 settle">Settle</span>
                                 </a>

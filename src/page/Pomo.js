@@ -107,8 +107,8 @@ class Pomo extends Component {
     componentDidMount() {
         // Temp
         const { cookies } = this.props;
-        const { defaultTimers, timers, phase } = this.state;
-        let initTimers = cookies.get("timer") ? cookies.get("timer") : timers;
+        const { defaultTimers, phase } = this.state;
+        let initTimers = cookies.get("timer") ? cookies.get("timer") : defaultTimers[0];
         let timer = initTimers.timers[phase];
 
         window.$('[data-toggle="tooltip"]').tooltip();
@@ -179,7 +179,6 @@ class Pomo extends Component {
             s: t.s < 10 ? "0" + t.s : t.s,
         };
 
-        //console.log("timeString :>> ", timeString);
         return formatT.h + ":" + formatT.m + ":" + formatT.s;
     }
 
@@ -226,7 +225,7 @@ class Pomo extends Component {
     resetPhase() {
         const { timers, phase } = this.state;
         let timer = timers.timers[phase];
-        console.log("timer :>> ", timer);
+
         this.updateTime(timer);
 
         this.setState({
