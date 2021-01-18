@@ -15,7 +15,7 @@ class Extrapolate extends Component {
     render() {
         const { info } = this.props;
         return (
-            <span className="extrapolate" data-toggle="tooltip" data-placement="right" title={info}>
+            <span className="extrapolate" data-toggle="tooltip" data-placement="bottom" title={info}>
                 <FontAwesomeIcon icon={faQuestionCircle} />
             </span>
         );

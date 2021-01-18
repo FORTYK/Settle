@@ -56,6 +56,7 @@ key {
 
 html {
   font-size: 1rem;
+  color: #aaa8ad;
 }
 
 body {
@@ -69,6 +70,11 @@ body {
 
 .bold {
   font-weight: bold;
+}
+
+#settings {
+  position: relative;
+  z-index: 200;
 }
 
 #watch {
@@ -93,16 +99,42 @@ body {
 }
 #watch .play {
   margin-top: 2px;
-  height: 3.75rem;
-  width: 3.75rem;
+  height: 4rem;
+  width: 4rem;
   color: inherit;
   border-radius: 50%;
   border: 0px;
 }
 #watch .play svg {
   float: left;
-  height: 3.75rem;
-  width: 3.75rem;
+  height: 4rem;
+  width: 4rem;
+}
+@media (max-width: 576px) {
+  #watch .face {
+    font-size: 4.25rem;
+    line-height: 4.25rem;
+    /*padding-bottom: 4rem;*/
+    width: 375px;
+  }
+  #watch .play {
+    height: 3rem;
+    width: 3rem;
+  }
+  #watch .play svg {
+    float: left;
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+p span.extrapolate {
+  display: inline;
+  position: relative;
+  top: -3px;
+  vertical-align: middle !important;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 h1 span.extrapolate {
@@ -165,7 +197,6 @@ span.extrapolate:hover {
   font-weight: 600;
 }
 #main p {
-  color: #aaa8ad;
   font-family: "Montserrat", serif;
 }
 
@@ -229,10 +260,27 @@ span.extrapolate:hover {
   border-color: #ff6f61;
 }
 
+.btn-default.active {
+  color: white;
+  background-color: #ff6f61;
+  border-color: #ff6f61;
+}
+
 .btn-default:hover {
   color: white;
   background-color: #ff8c81;
   border-color: #ff8c81;
+}
+
+.btn-text {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0px;
+}
+
+.btn-text:hover {
+  color: white;
 }
 
 .btn-white {
@@ -272,13 +320,14 @@ span.extrapolate:hover {
   border-color: #d3d9df;
 }
 
-.main-navbar-wrapper + .content:first-child {
+#content {
+  margin-top: -87px;
   padding-top: 87px;
 }
 
 .dontduckinglookatme {
   /* It's not about being in line, it's about looking in line*/
-  margin-right: -3px;
+  margin-right: -5px;
 }
 
 .pulse {
@@ -327,6 +376,15 @@ span.extrapolate:hover {
   }
   to {
     color: inherit;
+  }
+}
+#pomo p {
+  max-width: 500px;
+}
+
+@media (max-width: 576px) {
+  #pomo p {
+    max-width: 375px;
   }
 }
 

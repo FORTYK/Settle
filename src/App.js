@@ -31,11 +31,11 @@ class App extends Component {
             <Router>
                 <div id="main">
                     <MainNav></MainNav>
-                    <div className="content">
+                    <div id="content">
                         {/*
                             <Poll cookies={cookies}></Poll>
                         */}
-                        <Pomo />
+                        <Pomo cookies={cookies} />
                     </div>
                     <CookieBanner cookies={cookies} />
                 </div>
