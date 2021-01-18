@@ -28,6 +28,7 @@ class Pomo extends Component {
             phase: 0,
 
             timer: {
+                title: "",
                 h: 0,
                 m: 0,
                 s: 0,
@@ -35,7 +36,7 @@ class Pomo extends Component {
             startTime: new Date(),
             endTime: new Date(),
 
-            timers: {
+            chosenTimer: {
                 name: "Default 45:15",
                 timers: [
                     {
@@ -116,7 +117,7 @@ class Pomo extends Component {
         this.setState(
             {
                 timer: timer,
-                timers: initTimers,
+                chosenTimer: initTimers,
             },
             () => {
                 setInterval(this.tick, 100);
@@ -140,6 +141,7 @@ class Pomo extends Component {
             }, courtesyTimer);
         } else {
             if (started && !paused) {
+                const { title } = timer;
                 var currentTime = new Date();
 
                 // (d)elta
@@ -150,6 +152,7 @@ class Pomo extends Component {
                 if (dt < 0) {
                     this.setState({
                         timer: {
+                            title,
                             h: 0,
                             m: 0,
                             s: 0,
@@ -160,6 +163,7 @@ class Pomo extends Component {
                 } else {
                     this.setState({
                         timer: {
+                            title,
                             h: dtDate.getHours(),
                             m: dtDate.getMinutes(),
                             s: dtDate.getSeconds(),
@@ -213,7 +217,7 @@ class Pomo extends Component {
 
         this.setState(
             {
-                timers: timer,
+                chosenTimer: timer,
             },
             () => {
                 cookies.set("timer", timer, { path: "/" });
@@ -223,8 +227,8 @@ class Pomo extends Component {
     }
 
     resetPhase() {
-        const { timers, phase } = this.state;
-        let timer = timers.timers[phase];
+        const { chosenTimer, phase } = this.state;
+        let timer = chosenTimer.timers[phase];
 
         this.updateTime(timer);
 
@@ -239,17 +243,17 @@ class Pomo extends Component {
     nextPhase(e) {
         e.preventDefault();
 
-        const { timer, timers, paused } = this.state;
+        const { timer, chosenTimer, paused } = this.state;
 
         let { phase } = this.state;
-        const isStart = JSON.stringify(timer) !== JSON.stringify(timers.timers[phase]);
+        const isStart = JSON.stringify(timer) !== JSON.stringify(chosenTimer.timers[phase]);
         const isEnd = timer.h === 0 && timer.m === 0 && timer.s === 0;
 
         // isSkip is true if user changes phase while having ran
         let isSkip = isStart && !isEnd;
 
         // Next phase in iteration
-        phase = (phase + 1) % timers.length;
+        phase = (phase + 1) % chosenTimer.timers.length;
 
         this.setState(
             {
@@ -257,12 +261,12 @@ class Pomo extends Component {
                 courtesy: true,
 
                 phase: phase,
-                timer: timers.timers[phase],
+                timer: chosenTimer.timers[phase],
             },
             () => {
-                this.updateTime(timers.timers[phase]);
+                this.updateTime(chosenTimer.timers[phase]);
 
-                let nextPhase = timers.timers[(phase + 1) % timers.timers.length];
+                let nextPhase = chosenTimer.timers[(phase + 1) % chosenTimer.timers.length];
                 window.$("#phase").attr("data-original-title", "Nästa fas: " + nextPhase.title);
                 window.$("#play").attr("data-original-title", "");
 
@@ -305,11 +309,12 @@ class Pomo extends Component {
 
     render() {
         const { settings, information } = this.state;
-        const { started, paused, timer, timers, phase } = this.state;
-        let nextPhase = timers.timers[(phase + 1) % timers.timers.length];
+        const { started, paused, timer, chosenTimer, phase } = this.state;
+
+        let nextPhase = chosenTimer.timers[(phase + 1) % chosenTimer.timers.length];
         const isEnd = timer.h === 0 && timer.m === 0 && timer.s === 0;
 
-        let isTimerRun = JSON.stringify(timer) !== JSON.stringify(timers.timers[phase]);
+        let isTimerRun = JSON.stringify(timer) !== JSON.stringify(chosenTimer.timers[phase]);
 
         return (
             <div id="pomo">
@@ -321,7 +326,7 @@ class Pomo extends Component {
                                     <div id="watch">
                                         <div className="d-flex justify-content-between forehead easy-eyes">
                                             <div className="d-flex align-items-center">
-                                                <span className="title">{timers.timers[phase].title}</span>
+                                                <span className="title">{chosenTimer.timers[phase].title}</span>
                                                 <button
                                                     className={
                                                         "btn btn-fa-icon undo ml-1" + (isTimerRun ? "" : " d-none")
@@ -346,7 +351,7 @@ class Pomo extends Component {
                                                 >
                                                     <FontAwesomeIcon icon={faStepForward} />
                                                 </button>
-                                                {/*this.format(timers.timers[phase])*/}
+                                                {/*this.format(chosenTimer.timers[phase])*/}
                                             </div>
                                             <div className="dontduckinglookatme">
                                                 <div
@@ -459,7 +464,7 @@ class Pomo extends Component {
                                                             <button
                                                                 className={
                                                                     "btn btn-default btn-sm" +
-                                                                    (timers.name === x.name ? " active" : "")
+                                                                    (chosenTimer.name === x.name ? " active" : "")
                                                                 }
                                                                 onClick={(e) => {
                                                                     e.preventDefault();
@@ -484,7 +489,11 @@ class Pomo extends Component {
                                                 <span className="mb-1">Om hemsidan</span>
                                                 <p>
                                                     Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
-                                                    <a href="https://fontawesome.com/" target="_blank">
+                                                    <a
+                                                        href="https://fontawesome.com/"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                                    >
                                                         Font Awesome
                                                     </a>
                                                     .
