@@ -220,7 +220,7 @@ class Pomo extends Component {
                 chosenTimer: timer,
             },
             () => {
-                cookies.set("timer", timer, { path: "/" });
+                cookies.set("timer", timer, { path: "/", maxAge: 60 * 60 * 24 * 183 });
                 this.resetPhase();
             }
         );
@@ -443,7 +443,7 @@ class Pomo extends Component {
                                                 Inställningar
                                             </button>
                                             <Extrapolate info={"Inställningar sparas i dina cookies"} />
-                                            <p className="easy-eyes">
+                                            <p>
                                                 Detta projekt är WIP
                                                 <Extrapolate info={"Work In Progress"} /> vilket betyder att mycket av
                                                 utseendet kan komma att förändras.

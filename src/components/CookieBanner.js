@@ -10,12 +10,12 @@ class CookieBanner extends Component {
     onAccept(e) {
         e.preventDefault();
         const { cookies } = this.props;
-        cookies.set("allow-cookies", "true", { path: "/" });
+        cookies.set("scookies", "true", { path: "/", maxAge: 60 * 60 * 24 * 183 });
     }
 
     render() {
         const { cookies } = this.props;
-        if (cookies.get("allow-cookies") === "true") {
+        if (cookies.get("scookies") === "true") {
             return "";
         }
         return (
@@ -23,7 +23,7 @@ class CookieBanner extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 d-flex justify-content-between  align-items-center">
-                            <div id="">Denna hemsidan använder cookies!</div>
+                            <div id="">Denna hemsidan använder cookies för att spara användarens inställningar!</div>
                             <div>
                                 <button className="btn btn-white" onClick={this.onAccept}>
                                     Okej
