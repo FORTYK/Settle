@@ -360,8 +360,7 @@ class Pomo extends Component {
                                                     data-placement="bottom"
                                                     title="Information"
                                                 >
-                                                    <button
-                                                        type="button"
+                                                    <div
                                                         data-toggle="collapse"
                                                         data-target="#information"
                                                         aria-expanded="false"
@@ -370,7 +369,7 @@ class Pomo extends Component {
                                                         onClick={this.information}
                                                     >
                                                         <FontAwesomeIcon icon={faInfoCircle} />
-                                                    </button>
+                                                    </div>
                                                 </div>
                                                 {/* 
                                             
@@ -381,8 +380,7 @@ class Pomo extends Component {
                                                     data-placement="bottom"
                                                     title="Inställningar"
                                                 >
-                                                    <button
-                                                        type="button"
+                                                    <div
                                                         data-toggle="collapse"
                                                         data-target="#settings"
                                                         aria-expanded="false"
@@ -391,7 +389,7 @@ class Pomo extends Component {
                                                         onClick={this.settings}
                                                     >
                                                         <FontAwesomeIcon icon={faCog} />
-                                                    </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
