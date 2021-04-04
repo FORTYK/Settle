@@ -16,9 +16,12 @@ import Extrapolate from "../components/Extrapolate.js";
 class Pomo extends Component {
     constructor(props) {
         super(props);
+        const { cookies } = this.props;
+
         this.state = {
             settings: false,
             information: false,
+            customTimerEdit: false,
 
             started: false,
             paused: true,
@@ -38,6 +41,7 @@ class Pomo extends Component {
 
             chosenTimer: {
                 name: "Default 45:15",
+                id: 0,
                 timers: [
                     {
                         title: "Studera",
@@ -53,8 +57,9 @@ class Pomo extends Component {
                     },
                 ],
             },
-            defaultTimers: [
+            timers: [
                 {
+                    id: 0,
                     name: "Default 45:15",
                     timers: [
                         {
@@ -72,6 +77,7 @@ class Pomo extends Component {
                     ],
                 },
                 {
+                    id: 1,
                     name: "Traditionell 25:5",
                     timers: [
                         {
@@ -88,11 +94,36 @@ class Pomo extends Component {
                         },
                     ],
                 },
+                {
+                    id: 2,
+                    name: "Custom",
+                    timers: cookies.get("timer-custom")
+                        ? cookies.get("timer-custom")
+                        : [
+                              {
+                                  title: "Studera",
+                                  h: 0,
+                                  m: 0,
+                                  s: 0,
+                              },
+                              {
+                                  title: "Paus",
+                                  h: 0,
+                                  m: 0,
+                                  s: 0,
+                              },
+                          ],
+                },
             ],
+
+            customTimerField: "",
         };
 
         this.settings = this.settings.bind(this);
         this.information = this.information.bind(this);
+
+        this.saveCustomTimer = this.saveCustomTimer.bind(this);
+        this.resetCustomTimer = this.resetCustomTimer.bind(this);
 
         this.resetPhase = this.resetPhase.bind(this);
         this.nextPhase = this.nextPhase.bind(this);
@@ -108,8 +139,8 @@ class Pomo extends Component {
     componentDidMount() {
         // Temp
         const { cookies } = this.props;
-        const { defaultTimers, phase } = this.state;
-        let initTimers = cookies.get("timer") ? cookies.get("timer") : defaultTimers[0];
+        const { timers, phase } = this.state;
+        let initTimers = cookies.get("timer") ? cookies.get("timer") : timers[0];
         let timer = initTimers.timers[phase];
 
         window.$('[data-toggle="tooltip"]').tooltip();
@@ -118,6 +149,9 @@ class Pomo extends Component {
             {
                 timer: timer,
                 chosenTimer: initTimers,
+                customTimerField: cookies.get("timer-custom")
+                    ? JSON.stringify(cookies.get("timer-custom"), null, 2)
+                    : JSON.stringify(initTimers.timers, null, 2),
             },
             () => {
                 setInterval(this.tick, 100);
@@ -212,18 +246,26 @@ class Pomo extends Component {
         });
     }
 
-    setTimerConfiguration(timer) {
+    setTimerConfiguration(id_timer) {
         const { cookies } = this.props;
+        const { timers } = this.state;
 
-        this.setState(
-            {
-                chosenTimer: timer,
-            },
-            () => {
-                cookies.set("timer", timer, { path: "/", maxAge: 60 * 60 * 24 * 183 });
-                this.resetPhase();
+        for (let i = 0; i < timers.length; i++) {
+            const timer = timers[i];
+
+            if (id_timer === timer.id) {
+                this.setState(
+                    {
+                        chosenTimer: timer,
+                    },
+                    () => {
+                        cookies.set("timer", timer, { path: "/", maxAge: 60 * 60 * 24 * 183 });
+                        this.resetPhase();
+                    }
+                );
+                break;
             }
-        );
+        }
     }
 
     resetPhase() {
@@ -307,11 +349,58 @@ class Pomo extends Component {
         });
     }
 
+    loadCustom(e) {
+        e.preventDefault();
+        const { timers } = this.state;
+        const custom = timers[timers.length - 1];
+    }
+
+    resetCustomTimer(e) {
+        e.preventDefault();
+        let self = this;
+        const { cookies } = this.props;
+        const { timers } = this.state;
+        let reset = timers[0].timers;
+
+        cookies.set("timer-custom", JSON.stringify(reset, null, 2), {
+            path: "/",
+            maxAge: 60 * 60 * 24 * 183,
+        });
+        this.setState({ customTimerField: JSON.stringify(reset, null, 2) });
+    }
+
+    saveCustomTimer(e) {
+        let self = this;
+        e.preventDefault();
+        const { cookies } = this.props;
+        const { timers, customTimerField } = this.state;
+        const customTimerIndex = timers.length - 1;
+        const customTimer = timers[customTimerIndex];
+
+        let newTimers = timers;
+        const newCustomTimer = JSON.parse(customTimerField);
+
+        newTimers[customTimerIndex].timers = newCustomTimer;
+        cookies.set("timer-custom", JSON.stringify(newTimers[customTimerIndex].timers, null, 2), {
+            path: "/",
+            maxAge: 60 * 60 * 24 * 183,
+        });
+
+        this.setState({ timers: newTimers }, () => {
+            self.setTimerConfiguration(newTimers[customTimerIndex].id);
+        });
+    }
+
     render() {
-        const { settings, information } = this.state;
-        const { started, paused, timer, chosenTimer, phase } = this.state;
+        const { settings, information, timers } = this.state;
+        const { started, paused, timer, chosenTimer, phase, customTimerField } = this.state;
 
         let nextPhase = chosenTimer.timers[(phase + 1) % chosenTimer.timers.length];
+
+        const customTimerIndex = timers.length - 1;
+        const customTimer = timers[customTimerIndex];
+        const isCustom = chosenTimer.id === customTimer.id;
+
         const isEnd = timer.h === 0 && timer.m === 0 && timer.s === 0;
 
         let isTimerRun = JSON.stringify(timer) !== JSON.stringify(chosenTimer.timers[phase]);
@@ -431,32 +520,37 @@ class Pomo extends Component {
                                         <div className="col-12">
                                             <button
                                                 className="btn btn-text"
-                                                onClick={this.information}
+                                                onClick={this.settings}
                                                 type="button"
                                                 data-toggle="collapse"
-                                                data-target="#information"
+                                                data-target="#settings"
                                                 aria-expanded="false"
                                                 aria-controls="settings"
                                             >
                                                 Inställningar
                                             </button>
-                                            <Extrapolate info={"Inställningar sparas i dina cookies"} />
                                             <p>
                                                 Detta projekt är WIP
                                                 <Extrapolate info={"Work In Progress"} /> vilket betyder att mycket av
                                                 utseendet kan komma att förändras.
                                             </p>
+                                            <p>
+                                                Inställningar lagras i dina kakor. Kakorna lagras i upp till 6 månader
+                                                från den tidpunkt du senast var inne på hemsidan.asdasd
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-12">
-                                            <div>
-                                                <span className="mb-1">Timers</span>
-                                                <p> </p>
+                                            <div className="row">
+                                                <div className="col-12">
+                                                    <span className="mb-1">Timers</span>
+                                                    <p> </p>
+                                                </div>
                                             </div>
 
                                             <div className="row">
-                                                {this.state.defaultTimers.map((x, i) => {
+                                                {timers.map((x, i) => {
                                                     return (
                                                         <div key={i} className="col-auto">
                                                             <button
@@ -466,7 +560,7 @@ class Pomo extends Component {
                                                                 }
                                                                 onClick={(e) => {
                                                                     e.preventDefault();
-                                                                    this.setTimerConfiguration(x);
+                                                                    this.setTimerConfiguration(x.id);
                                                                 }}
                                                             >
                                                                 {x.name}
@@ -474,6 +568,47 @@ class Pomo extends Component {
                                                         </div>
                                                     );
                                                 })}
+                                            </div>
+
+                                            <div
+                                                id="customTimerEdit"
+                                                className={"transition overflow-hidden row mt-5"}
+                                                style={{ maxHeight: isCustom ? " 9999px" : "0px" }}
+                                            >
+                                                <div className="col-12">
+                                                    <div className="row">
+                                                        <div className="col-12">
+                                                            <span className="mb-1"></span>
+                                                            <p>Konstruera din egen timer med hjälp av JSON!</p>
+                                                            <textarea
+                                                                className="w-100"
+                                                                style={{ maxHeight: "43.2rem", minHeight: "21.6rem" }}
+                                                                value={customTimerField}
+                                                                onChange={(e) => {
+                                                                    e.preventDefault();
+                                                                    let value = e.currentTarget.value;
+
+                                                                    this.setState({
+                                                                        customTimerField: value,
+                                                                    });
+                                                                }}
+                                                            ></textarea>
+
+                                                            <button
+                                                                onClick={this.saveCustomTimer}
+                                                                className="btn btn-default btn-sm active mr-2"
+                                                            >
+                                                                Ladda in
+                                                            </button>
+                                                            <button
+                                                                onClick={this.resetCustomTimer}
+                                                                className="btn btn-default btn-sm"
+                                                            >
+                                                                Återställ
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -483,21 +618,29 @@ class Pomo extends Component {
                                 <div className="col-12">
                                     <div className="row">
                                         <div className="col-12">
-                                            <div>
-                                                <span className="mb-1">Om hemsidan</span>
-                                                <p>
-                                                    Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
-                                                    <a
-                                                        href="https://fontawesome.com/"
-                                                        rel="noopener noreferrer"
-                                                        target="_blank"
-                                                    >
-                                                        Font Awesome
-                                                    </a>
-                                                    .
-                                                </p>
-                                                <p>Cookies används för att lagra användarens inställningar.</p>
-                                            </div>
+                                            <button
+                                                className="btn btn-text"
+                                                onClick={this.settings}
+                                                type="button"
+                                                data-toggle="collapse"
+                                                data-target="#information"
+                                                aria-expanded="false"
+                                                aria-controls="settings"
+                                            >
+                                                Om hemsidan
+                                            </button>
+                                            <p>
+                                                Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
+                                                <a
+                                                    href="https://fontawesome.com/"
+                                                    rel="noopener noreferrer"
+                                                    target="_blank"
+                                                >
+                                                    Font Awesome
+                                                </a>
+                                                .
+                                            </p>
+                                            <p>Cookies används för att lagra användarens inställningar.</p>
                                         </div>
                                     </div>
                                 </div>

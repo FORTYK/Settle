@@ -14,7 +14,7 @@ main #5f4a8b
   height: 40px;
   padding: 0.5rem;
   border-radius: 2px;
-  border: 1px solid #55515c;
+  border: 1px solid #7f7d88;
 }
 
 .poll-meter.voted {
@@ -22,18 +22,18 @@ main #5f4a8b
 }
 
 .poll-meter.active:hover {
-  background-color: #55515c;
+  background-color: #7f7d88;
   cursor: pointer;
 }
 
 .poll-meter.active.selected {
-  background-color: #55515c;
+  background-color: #7f7d88;
 }
 
 .poll-meter-meter {
   position: absolute;
   height: 38px;
-  background-color: #55515c;
+  background-color: #7f7d88;
   margin-top: -39px;
   border-radius: 2px;
   z-index: 0;
@@ -65,7 +65,7 @@ body {
 }
 
 .darker {
-  color: #221e29;
+  color: #26272b;
 }
 
 .bold {
@@ -75,6 +75,13 @@ body {
 #settings {
   position: relative;
   z-index: 200;
+}
+
+.transition {
+  -webkit-transition: all 0.35s 0s ease;
+  -moz-transition: all 0.35s 0s ease;
+  -o-transition: all 0.35s 0s ease;
+  transition: all 0.35s 0s ease;
 }
 
 #watch {
@@ -170,7 +177,7 @@ span.extrapolate:hover {
 }
 
 .easy-eyes {
-  color: #55515c;
+  color: #7f7d88;
 }
 
 .display-1 {
@@ -179,7 +186,7 @@ span.extrapolate:hover {
 }
 
 #main {
-  background-color: #2b2633;
+  background-color: #2f3136;
 }
 #main h1,
 #main h2,
@@ -256,7 +263,7 @@ span.extrapolate:hover {
 
 .btn-default {
   color: #ff6f61;
-  background-color: #2b2633;
+  background-color: #2f3136;
   border-color: #ff6f61;
 }
 
