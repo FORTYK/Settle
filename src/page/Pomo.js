@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faPlayCircle,
-    faPauseCircle,
-    faCog,
-    faInfoCircle,
-    faUndo,
-    faStepForward,
-    //faForward,
-} from "@fortawesome/free-solid-svg-icons";
-
+import WatchFace from "../components/Pomo/WatchFace.js";
 import Extrapolate from "../components/Extrapolate.js";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 class Pomo extends Component {
     constructor(props) {
@@ -122,22 +115,20 @@ class Pomo extends Component {
         this.settings = this.settings.bind(this);
         this.information = this.information.bind(this);
 
-        this.saveCustomTimer = this.saveCustomTimer.bind(this);
-        this.resetCustomTimer = this.resetCustomTimer.bind(this);
+        this.start = this.start.bind(this);
+        this.pause = this.pause.bind(this);
 
         this.resetPhase = this.resetPhase.bind(this);
         this.nextPhase = this.nextPhase.bind(this);
 
-        this.start = this.start.bind(this);
-        this.pause = this.pause.bind(this);
-
         this.updateTime = this.updateTime.bind(this);
-
         this.tick = this.tick.bind(this);
+
+        this.saveCustomTimer = this.saveCustomTimer.bind(this);
+        this.resetCustomTimer = this.resetCustomTimer.bind(this);
     }
 
     componentDidMount() {
-        // Temp
         const { cookies } = this.props;
         const { timers, phase } = this.state;
         let initTimers = cookies.get("timer") ? cookies.get("timer") : timers[0];
@@ -206,18 +197,6 @@ class Pomo extends Component {
                 }
             }
         }
-    }
-
-    format(t) {
-        //(t)imer
-
-        let formatT = {
-            h: t.h < 10 ? "0" + t.h : t.h,
-            m: t.m < 10 ? "0" + t.m : t.m,
-            s: t.s < 10 ? "0" + t.s : t.s,
-        };
-
-        return formatT.h + ":" + formatT.m + ":" + formatT.s;
     }
 
     start(e) {
@@ -392,18 +371,17 @@ class Pomo extends Component {
     }
 
     render() {
-        const { settings, information, timers } = this.state;
-        const { started, paused, timer, chosenTimer, phase, customTimerField } = this.state;
+        // Watchface
+        const { settings, information } = this.state;
+        const { started, paused, timer, phase } = this.state;
 
-        let nextPhase = chosenTimer.timers[(phase + 1) % chosenTimer.timers.length];
+        // Rest
+        const { timers } = this.state;
+        const { chosenTimer, customTimerField } = this.state;
 
         const customTimerIndex = timers.length - 1;
         const customTimer = timers[customTimerIndex];
         const isCustom = chosenTimer.id === customTimer.id;
-
-        const isEnd = timer.h === 0 && timer.m === 0 && timer.s === 0;
-
-        let isTimerRun = JSON.stringify(timer) !== JSON.stringify(chosenTimer.timers[phase]);
 
         return (
             <div id="pomo">
@@ -412,105 +390,56 @@ class Pomo extends Component {
                         <div className="col-auto">
                             <div className="row">
                                 <div className="col">
-                                    <div id="watch">
-                                        <div className="d-flex justify-content-between forehead easy-eyes">
-                                            <div className="d-flex align-items-center">
-                                                <span className="title">{chosenTimer.timers[phase].title}</span>
-                                                <button
-                                                    className={
-                                                        "btn btn-fa-icon undo ml-1" + (isTimerRun ? "" : " d-none")
-                                                    }
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        this.resetPhase();
-                                                    }}
-                                                    data-toggle="tooltip"
-                                                    data-placement="right"
-                                                    title={"Starta om fas"}
-                                                >
-                                                    <FontAwesomeIcon icon={faUndo} />
-                                                </button>
-                                                <button
-                                                    id="phase"
-                                                    className="btn btn-fa-icon"
-                                                    onClick={this.nextPhase}
-                                                    data-toggle="tooltip"
-                                                    data-placement="bottom"
-                                                    title={"Nästa fas: " + nextPhase.title}
-                                                >
-                                                    <FontAwesomeIcon icon={faStepForward} />
-                                                </button>
-                                                {/*this.format(chosenTimer.timers[phase])*/}
+                                    <WatchFace
+                                        timers={timers}
+                                        chosenTimer={chosenTimer}
+                                        phase={phase}
+                                        timer={timer}
+                                        started={started}
+                                        paused={paused}
+                                        start={this.start}
+                                        pause={this.pause}
+                                        resetPhase={this.resetPhase}
+                                        nextPhase={this.nextPhase}
+                                    >
+                                        <div
+                                            className="d-inline-block"
+                                            data-toggle="tooltip"
+                                            data-placement="bottom"
+                                            title="Information"
+                                        >
+                                            <div
+                                                data-toggle="collapse"
+                                                data-target="#information"
+                                                aria-expanded="false"
+                                                aria-controls="information"
+                                                className={"btn btn-fa-icon" + (information ? " active" : "")}
+                                                onClick={this.information}
+                                            >
+                                                <FontAwesomeIcon icon={faInfoCircle} />
                                             </div>
-                                            <div className="dontduckinglookatme">
-                                                <div
-                                                    className="d-inline-block"
-                                                    data-toggle="tooltip"
-                                                    data-placement="bottom"
-                                                    title="Information"
-                                                >
-                                                    <div
-                                                        data-toggle="collapse"
-                                                        data-target="#information"
-                                                        aria-expanded="false"
-                                                        aria-controls="information"
-                                                        className={"btn btn-fa-icon" + (information ? " active" : "")}
-                                                        onClick={this.information}
-                                                    >
-                                                        <FontAwesomeIcon icon={faInfoCircle} />
-                                                    </div>
-                                                </div>
-                                                {/* 
+                                        </div>
+                                        {/* 
                                             
                                             */}
-                                                <div
-                                                    className="d-inline-block"
-                                                    data-toggle="tooltip"
-                                                    data-placement="bottom"
-                                                    title="Inställningar"
-                                                >
-                                                    <div
-                                                        data-toggle="collapse"
-                                                        data-target="#settings"
-                                                        aria-expanded="false"
-                                                        aria-controls="settings"
-                                                        className={"btn btn-fa-icon" + (settings ? " active" : "")}
-                                                        onClick={this.settings}
-                                                    >
-                                                        <FontAwesomeIcon icon={faCog} />
-                                                    </div>
-                                                </div>
+                                        <div
+                                            className="d-inline-block"
+                                            data-toggle="tooltip"
+                                            data-placement="bottom"
+                                            title="Inställningar"
+                                        >
+                                            <div
+                                                data-toggle="collapse"
+                                                data-target="#settings"
+                                                aria-expanded="false"
+                                                aria-controls="settings"
+                                                className={"btn btn-fa-icon" + (settings ? " active" : "")}
+                                                onClick={this.settings}
+                                            >
+                                                <FontAwesomeIcon icon={faCog} />
                                             </div>
                                         </div>
-                                        <div className="d-flex d-flex justify-content-between face easy-eyes">
-                                            <span className="align-middle">{this.format(timer)}</span>
-                                            <div className="d-flex align-items-center">
-                                                <button
-                                                    id="play"
-                                                    type="button"
-                                                    data-toggle="tooltip"
-                                                    data-placement="bottom"
-                                                    title=""
-                                                    className={
-                                                        "btn btn-fa-icon play" + (isEnd && started ? " pulse" : "")
-                                                    }
-                                                    onClick={
-                                                        started && isEnd
-                                                            ? this.nextPhase
-                                                            : paused
-                                                            ? this.start
-                                                            : this.pause
-                                                    }
-                                                >
-                                                    <FontAwesomeIcon
-                                                        icon={
-                                                            (started && isEnd) || paused ? faPlayCircle : faPauseCircle
-                                                        }
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </WatchFace>
                                 </div>
                             </div>
 
