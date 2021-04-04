@@ -328,15 +328,8 @@ class Pomo extends Component {
         });
     }
 
-    loadCustom(e) {
-        e.preventDefault();
-        const { timers } = this.state;
-        const custom = timers[timers.length - 1];
-    }
-
     resetCustomTimer(e) {
         e.preventDefault();
-        let self = this;
         const { cookies } = this.props;
         const { timers } = this.state;
         let reset = timers[0].timers;
@@ -354,7 +347,6 @@ class Pomo extends Component {
         const { cookies } = this.props;
         const { timers, customTimerField } = this.state;
         const customTimerIndex = timers.length - 1;
-        const customTimer = timers[customTimerIndex];
 
         let newTimers = timers;
         const newCustomTimer = JSON.parse(customTimerField);

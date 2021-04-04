@@ -7,7 +7,6 @@ class Button extends Component {
     }
     render() {
         const { className, title, id, onClick, dataPlacement } = this.props;
-        console.log("className :>> ", className);
         return (
             <button
                 id={id}

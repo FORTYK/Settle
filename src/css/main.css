@@ -14,7 +14,7 @@ main #5f4a8b
   height: 40px;
   padding: 0.5rem;
   border-radius: 2px;
-  border: 1px solid #7f7d88;
+  border: 1px solid #4a4c51;
 }
 
 .poll-meter.voted {
@@ -22,18 +22,18 @@ main #5f4a8b
 }
 
 .poll-meter.active:hover {
-  background-color: #7f7d88;
+  background-color: #4a4c51;
   cursor: pointer;
 }
 
 .poll-meter.active.selected {
-  background-color: #7f7d88;
+  background-color: #4a4c51;
 }
 
 .poll-meter-meter {
   position: absolute;
   height: 38px;
-  background-color: #7f7d88;
+  background-color: #4a4c51;
   margin-top: -39px;
   border-radius: 2px;
   z-index: 0;
@@ -65,7 +65,7 @@ body {
 }
 
 .darker {
-  color: #26272b;
+  color: #222429;
 }
 
 .bold {
@@ -177,7 +177,7 @@ span.extrapolate:hover {
 }
 
 .easy-eyes {
-  color: #7f7d88;
+  color: #4a4c51;
 }
 
 .display-1 {
@@ -186,7 +186,7 @@ span.extrapolate:hover {
 }
 
 #main {
-  background-color: #2f3136;
+  background-color: #26282e;
 }
 #main h1,
 #main h2,
@@ -263,7 +263,7 @@ span.extrapolate:hover {
 
 .btn-default {
   color: #ff6f61;
-  background-color: #2f3136;
+  background-color: #26282e;
   border-color: #ff6f61;
 }
 
