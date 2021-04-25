@@ -135,15 +135,6 @@ body {
   }
 }
 
-p span.extrapolate {
-  display: inline;
-  position: relative;
-  top: -3px;
-  vertical-align: middle !important;
-  margin-left: 2px;
-  margin-right: 2px;
-}
-
 h1 span.extrapolate {
   font-size: 0.8rem;
 }
@@ -161,10 +152,13 @@ h4 span.extrapolate {
 }
 
 span.extrapolate {
+  display: inline;
+  position: relative;
+  vertical-align: top !important;
   font-size: 0.6rem;
-  position: absolute;
-  top: 7px;
-  margin-left: 5px;
+  margin-top: -10px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 span.extrapolate:hover {
   cursor: pointer;
@@ -213,7 +207,7 @@ span.extrapolate:hover {
 }
 
 .th {
-  margin-top: -87px;
+  margin-top: -88px;
   min-height: calc(100vh);
 }
 
@@ -328,8 +322,8 @@ span.extrapolate:hover {
 }
 
 #content {
-  margin-top: -87px;
-  padding-top: 87px;
+  margin-top: -88px;
+  padding-top: 88px;
 }
 
 .dontduckinglookatme {
@@ -393,6 +387,9 @@ span.extrapolate:hover {
   #pomo p {
     max-width: 375px;
   }
+}
+.nav-padding {
+  padding: 88px 0px;
 }
 
 /*# sourceMappingURL=main.css.map */

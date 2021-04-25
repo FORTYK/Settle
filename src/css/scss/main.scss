@@ -13,7 +13,7 @@ $base-color-dark-shade: #222429;
 
 $secondary-color: #ff6f61;
 $secondary-color-light-shade: #ff8c81;
-$nav-height: 87px;
+$nav-height: 88px;
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
@@ -124,15 +124,6 @@ body {
     }
 }
 
-p span.extrapolate {
-    display: inline;
-    position: relative;
-    top: -3px;
-    vertical-align: middle !important;
-    margin-left: 2px;
-    margin-right: 2px;
-}
-
 h1 span.extrapolate {
     font-size: 0.8rem;
 }
@@ -147,10 +138,13 @@ h4 span.extrapolate {
 }
 
 span.extrapolate {
+    display: inline;
+    position: relative;
+    vertical-align: top !important;
     font-size: 0.6rem;
-    position: absolute;
-    top: 7px;
-    margin-left: 5px;
+    margin-top: -10px;
+    margin-left: 2px;
+    margin-right: 2px;
     &:hover {
         cursor: pointer;
         color: white;
@@ -389,4 +383,8 @@ span.extrapolate {
             max-width: 375px;
         }
     }
+}
+
+.nav-padding {
+    padding: $nav-height 0px;
 }

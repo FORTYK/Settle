@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import WatchFace from "../components/Pomo/WatchFace.js";
 import Extrapolate from "../components/Extrapolate.js";
 
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -322,6 +323,7 @@ class Pomo extends Component {
     information(e) {
         e.preventDefault();
         const { information } = this.state;
+        window.$('[data-toggle="tooltip"]').tooltip();
 
         this.setState({
             information: !information,
@@ -377,7 +379,7 @@ class Pomo extends Component {
 
         return (
             <div id="pomo">
-                <div className="container th d-flex align-items-center justify-content-center ">
+                <div className="container th d-flex align-items-center justify-content-center nav-padding">
                     <div className="row mb-3">
                         <div className="col-auto">
                             <div className="row">
@@ -452,12 +454,12 @@ class Pomo extends Component {
                                             </button>
                                             <p>
                                                 Detta projekt är WIP
-                                                <Extrapolate info={"Work In Progress"} /> vilket betyder att mycket av
-                                                utseendet kan komma att förändras.
+                                                <Extrapolate info={"Work In Progress"}></Extrapolate> vilket betyder att
+                                                mycket av utseendet kan komma att förändras.
                                             </p>
                                             <p>
                                                 Inställningar lagras i dina kakor. Kakorna lagras i upp till 6 månader
-                                                från den tidpunkt du senast var inne på hemsidan.asdasd
+                                                från den tidpunkt du senast var inne på hemsidan.
                                             </p>
                                         </div>
                                     </div>
@@ -539,29 +541,135 @@ class Pomo extends Component {
                                 <div className="col-12">
                                     <div className="row">
                                         <div className="col-12">
-                                            <button
-                                                className="btn btn-text"
-                                                onClick={this.settings}
-                                                type="button"
-                                                data-toggle="collapse"
-                                                data-target="#information"
-                                                aria-expanded="false"
-                                                aria-controls="settings"
-                                            >
-                                                Om hemsidan
-                                            </button>
-                                            <p>
-                                                Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
-                                                <a
-                                                    href="https://fontawesome.com/"
-                                                    rel="noopener noreferrer"
-                                                    target="_blank"
+                                            <div className="mb-4">
+                                                <button
+                                                    className="btn btn-text"
+                                                    onClick={this.settings}
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#information"
+                                                    aria-expanded="false"
+                                                    aria-controls="settings"
                                                 >
-                                                    Font Awesome
-                                                </a>
-                                                .
-                                            </p>
-                                            <p>Cookies används för att lagra användarens inställningar.</p>
+                                                    Om hemsidan
+                                                </button>
+                                                <p>
+                                                    Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
+                                                    <a
+                                                        href="https://fontawesome.com/"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                                    >
+                                                        Font Awesome
+                                                    </a>
+                                                    .
+                                                </p>
+                                            </div>
+                                            <div className="mb-4">
+                                                <label>Kakor</label>
+                                                <p>
+                                                    På denna webbplats används kakor. En kaka är en kort text som lagras
+                                                    i din webbläsare.
+                                                </p>
+                                                <p>
+                                                    Denna webbplats använder Google Analytics för att följa upp trafiken
+                                                    på webbplatsen i syfte att förbättra innehåll, navigation och
+                                                    struktur. Vid första kontakt med webbservern så lagras en cookie i
+                                                    din webbläsare, som sedan läses av webbservern vid varje kontakt.
+                                                    Därmed kan webbservern känna igen din webbläsare.{" "}
+                                                    <a
+                                                        href="http://www.minacookies.se/"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                                    >
+                                                        Läs mer om kakor och hur du tar bort dem.
+                                                    </a>
+                                                </p>
+                                                <table style={{ maxWidth: "500px" }}>
+                                                    <caption>Kakor som är väsentliga för appens funktion.</caption>
+                                                    <thead>
+                                                        <tr className="border-bottom">
+                                                            <th className="font-weight-normal">Namn</th>
+                                                            <th className="px-3 font-weight-normal">Utgångstid</th>
+                                                            <th className="font-weight-normal">Beskrivning</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>scookies</td>
+                                                            <td className="px-3">6 månader</td>
+                                                            <td>
+                                                                Används för att underrätta användaren om att kakor
+                                                                används på sidan
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>timer</td>
+                                                            <td className="px-3">6 månader</td>
+                                                            <td>
+                                                                Används för att lagra användarens tillstånd vid
+                                                                användning av timern
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>timer-custom</td>
+                                                            <td className="px-3">6 månader</td>
+                                                            <td>Används för att lagra användarens anpassade timer</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div className="mb-4">
+                                                <table style={{ maxWidth: "500px" }}>
+                                                    <caption>
+                                                        Kakor som används för användaranalys,{" "}
+                                                        <a
+                                                            href="https://developers.google.com/analytics/devguides/collection/gajs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage"
+                                                            rel="noopener noreferrer"
+                                                            target="_blank"
+                                                        >
+                                                            Google Analytics
+                                                        </a>{" "}
+                                                        (2021-04-25).{" "}
+                                                        <a
+                                                            href="https://support.google.com/analytics/answer/6004245"
+                                                            rel="noopener noreferrer"
+                                                            target="_blank"
+                                                        >
+                                                            Läs mer
+                                                        </a>
+                                                    </caption>
+                                                    <thead>
+                                                        <tr className="border-bottom">
+                                                            <th className="font-weight-normal">Namn</th>
+                                                            <th className="px-3 font-weight-normal">Utgångstid</th>
+                                                            <th className="font-weight-normal">Beskrivning</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>_ga</td>
+                                                            <td className="px-3">2 år</td>
+                                                            <td>
+                                                                Används för att känna igen, och skilja på, användare
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>_gid</td>
+                                                            <td className="px-3">24 timmar</td>
+                                                            <td>
+                                                                Används för att lagra användarens tillstånd vid
+                                                                användning av timern
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{"_ga_<container-id>"}</td>
+                                                            <td className="px-3">2 år</td>
+                                                            <td>Används för att hålla session tillstånd</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

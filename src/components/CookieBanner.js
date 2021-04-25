@@ -23,8 +23,19 @@ class CookieBanner extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 d-flex justify-content-between  align-items-center">
-                            <div id="">Denna hemsidan använder cookies för att spara användarens inställningar!</div>
+                            <div id="">Denna hemsidan använder cookies!</div>
                             <div>
+                                <button
+                                    className="btn btn-text mr-3"
+                                    onClick={this.settings}
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#information"
+                                    aria-expanded="false"
+                                    aria-controls="settings"
+                                >
+                                    Läs mer
+                                </button>
                                 <button className="btn btn-white" onClick={this.onAccept}>
                                     Okej
                                 </button>
