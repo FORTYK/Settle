@@ -457,10 +457,7 @@ class Pomo extends Component {
                                                 <Extrapolate info={"Work In Progress"}></Extrapolate> vilket betyder att
                                                 mycket av utseendet kan komma att förändras.
                                             </p>
-                                            <p>
-                                                Inställningar lagras i dina kakor. Kakorna lagras i upp till 6 månader
-                                                från den tidpunkt du senast var inne på hemsidan.
-                                            </p>
+                                            <p>Inställningar lagras i dina kakor.</p>
                                         </div>
                                     </div>
                                     <div className="row">
