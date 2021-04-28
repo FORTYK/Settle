@@ -567,7 +567,7 @@ class Pomo extends Component {
                                                         .
                                                     </p>
                                                 </div>
-                                                <div className="mb-4" style={{ overflow: "scroll" }}>
+                                                <div className="mb-4" style={{ overflow: "auto" }}>
                                                     <label>Kakor</label>
                                                     <p>
                                                         På denna webbplats används kakor. En kaka är en kort text som
@@ -624,7 +624,7 @@ class Pomo extends Component {
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div className="mb-4" style={{ overflow: "scroll" }}>
+                                                <div className="mb-4" style={{ overflow: "auto" }}>
                                                     <table>
                                                         <caption>
                                                             Kakor som används för användaranalys,{" "}
