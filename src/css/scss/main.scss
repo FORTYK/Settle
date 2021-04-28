@@ -1,6 +1,7 @@
 /*
 main #5f4a8b
 */
+$white-color: #efefef;
 $text-color: #aaa8ad;
 
 //$base-color: #2b2633;
@@ -68,7 +69,7 @@ body {
 
     .title {
         &:hover {
-            color: white;
+            color: $white-color;
             cursor: default;
         }
     }
@@ -147,7 +148,7 @@ span.extrapolate {
     margin-right: 2px;
     &:hover {
         cursor: pointer;
-        color: white;
+        color: $white-color;
     }
 }
 
@@ -234,8 +235,11 @@ span.extrapolate {
 
 #comply {
     background-color: $secondary-color;
-    color: white;
+    color: $white-color;
     font-size: 1.125rem;
+    .btn-white {
+        color: $secondary-color;
+    }
 }
 
 #settle-logo {
@@ -250,13 +254,13 @@ span.extrapolate {
 }
 
 .btn-default.active {
-    color: white;
+    color: $white-color;
     background-color: $secondary-color;
     border-color: $secondary-color;
 }
 
 .btn-default:hover {
-    color: white;
+    color: $white-color;
     background-color: $secondary-color-light-shade;
     border-color: $secondary-color-light-shade;
 }
@@ -269,14 +273,14 @@ span.extrapolate {
 }
 
 .btn-text:hover {
-    color: white;
+    color: $white-color;
 }
 
 .btn-white {
     font-weight: bold;
-    color: $secondary-color;
-    background-color: #f8f9fa;
-    border-color: #f8f9fa;
+    color: $text-color;
+    background-color: $white-color;
+    border-color: $white-color;
 }
 
 .btn-white:hover {
@@ -298,7 +302,7 @@ span.extrapolate {
 
 .btn-fa-icon:hover,
 .btn-fa-icon.active {
-    color: white !important;
+    color: $white-color !important;
 }
 
 .btn-white:not(:disabled):not(.disabled).active,
@@ -333,7 +337,7 @@ span.extrapolate {
 
 @-webkit-keyframes color_change {
     from {
-        color: white;
+        color: $white-color;
     }
     to {
         color: inherit;
@@ -341,7 +345,7 @@ span.extrapolate {
 }
 @-moz-keyframes color_change {
     from {
-        color: white;
+        color: $white-color;
     }
     to {
         color: inherit;
@@ -349,7 +353,7 @@ span.extrapolate {
 }
 @-ms-keyframes color_change {
     from {
-        color: white;
+        color: $white-color;
     }
     to {
         color: inherit;
@@ -357,7 +361,7 @@ span.extrapolate {
 }
 @-o-keyframes color_change {
     from {
-        color: white;
+        color: $white-color;
     }
     to {
         color: inherit;
@@ -365,7 +369,7 @@ span.extrapolate {
 }
 @keyframes color_change {
     from {
-        color: white;
+        color: $white-color;
     }
     to {
         color: inherit;

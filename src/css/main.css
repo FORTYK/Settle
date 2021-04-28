@@ -90,7 +90,7 @@ body {
   z-index: 100;
 }
 #watch .title:hover {
-  color: white;
+  color: #efefef;
   cursor: default;
 }
 #watch .forehead {
@@ -162,7 +162,7 @@ span.extrapolate {
 }
 span.extrapolate:hover {
   cursor: pointer;
-  color: white;
+  color: #efefef;
 }
 
 .temp {
@@ -246,8 +246,11 @@ span.extrapolate:hover {
 
 #comply {
   background-color: #ff6f61;
-  color: white;
+  color: #efefef;
   font-size: 1.125rem;
+}
+#comply .btn-white {
+  color: #ff6f61;
 }
 
 #settle-logo {
@@ -262,13 +265,13 @@ span.extrapolate:hover {
 }
 
 .btn-default.active {
-  color: white;
+  color: #efefef;
   background-color: #ff6f61;
   border-color: #ff6f61;
 }
 
 .btn-default:hover {
-  color: white;
+  color: #efefef;
   background-color: #ff8c81;
   border-color: #ff8c81;
 }
@@ -281,14 +284,14 @@ span.extrapolate:hover {
 }
 
 .btn-text:hover {
-  color: white;
+  color: #efefef;
 }
 
 .btn-white {
   font-weight: bold;
-  color: #ff6f61;
-  background-color: #f8f9fa;
-  border-color: #f8f9fa;
+  color: #aaa8ad;
+  background-color: #efefef;
+  border-color: #efefef;
 }
 
 .btn-white:hover {
@@ -310,7 +313,7 @@ span.extrapolate:hover {
 
 .btn-fa-icon:hover,
 .btn-fa-icon.active {
-  color: white !important;
+  color: #efefef !important;
 }
 
 .btn-white:not(:disabled):not(.disabled).active,
@@ -341,7 +344,7 @@ span.extrapolate:hover {
 
 @-webkit-keyframes color_change {
   from {
-    color: white;
+    color: #efefef;
   }
   to {
     color: inherit;
@@ -349,7 +352,7 @@ span.extrapolate:hover {
 }
 @-moz-keyframes color_change {
   from {
-    color: white;
+    color: #efefef;
   }
   to {
     color: inherit;
@@ -357,7 +360,7 @@ span.extrapolate:hover {
 }
 @-ms-keyframes color_change {
   from {
-    color: white;
+    color: #efefef;
   }
   to {
     color: inherit;
@@ -365,7 +368,7 @@ span.extrapolate:hover {
 }
 @-o-keyframes color_change {
   from {
-    color: white;
+    color: #efefef;
   }
   to {
     color: inherit;
@@ -373,7 +376,7 @@ span.extrapolate:hover {
 }
 @keyframes color_change {
   from {
-    color: white;
+    color: #efefef;
   }
   to {
     color: inherit;
