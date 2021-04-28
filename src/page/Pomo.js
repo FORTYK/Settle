@@ -567,7 +567,7 @@ class Pomo extends Component {
                                                         .
                                                     </p>
                                                 </div>
-                                                <div className="mb-4" style={{ overflow: "auto" }}>
+                                                <div>
                                                     <label>Kakor</label>
                                                     <p>
                                                         På denna webbplats används kakor. En kaka är en kort text som
@@ -588,6 +588,8 @@ class Pomo extends Component {
                                                             Läs mer om kakor och hur du tar bort dem.
                                                         </a>
                                                     </p>
+                                                </div>
+                                                <div className="mb-4" style={{ overflow: "auto" }}>
                                                     <table>
                                                         <caption>Kakor som är väsentliga för appens funktion.</caption>
                                                         <thead>
