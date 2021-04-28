@@ -381,9 +381,9 @@ class Pomo extends Component {
             <div id="pomo">
                 <div className="container th d-flex align-items-center justify-content-center nav-padding">
                     <div className="row mb-3">
-                        <div className="col-auto">
+                        <div id="wrap-app" className="col-auto">
                             <div className="row">
-                                <div className="col">
+                                <div className="col-12">
                                     <WatchFace
                                         timers={timers}
                                         chosenTimer={chosenTimer}
@@ -437,95 +437,99 @@ class Pomo extends Component {
                                 </div>
                             </div>
 
-                            <div id="settings" className="row collapse multi-collapse mt-5">
+                            <div className="row">
                                 <div className="col-12">
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <button
-                                                className="btn btn-text"
-                                                onClick={this.settings}
-                                                type="button"
-                                                data-toggle="collapse"
-                                                data-target="#settings"
-                                                aria-expanded="false"
-                                                aria-controls="settings"
-                                            >
-                                                Inställningar
-                                            </button>
-                                            <p>
-                                                Detta projekt är WIP
-                                                <Extrapolate info={"Work In Progress"}></Extrapolate> vilket betyder att
-                                                mycket av utseendet kan komma att förändras.
-                                            </p>
-                                            <p>Inställningar lagras i dina kakor.</p>
+                                    <div id="settings" className="collapse multi-collapse mt-4">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <button
+                                                    className="btn btn-text"
+                                                    onClick={this.settings}
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#settings"
+                                                    aria-expanded="false"
+                                                    aria-controls="settings"
+                                                >
+                                                    Inställningar
+                                                </button>
+                                                <p>
+                                                    Detta projekt är WIP
+                                                    <Extrapolate info={"Work In Progress"}></Extrapolate> vilket betyder
+                                                    att mycket av utseendet kan komma att förändras.
+                                                </p>
+                                                <p>Inställningar lagras i dina kakor.</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <span className="mb-1">Timers</span>
-                                                    <p> </p>
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <span className="mb-1">Timers</span>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="row">
-                                                {timers.map((x, i) => {
-                                                    return (
-                                                        <div key={i} className="col-auto">
-                                                            <button
-                                                                className={
-                                                                    "btn btn-default btn-sm" +
-                                                                    (chosenTimer.name === x.name ? " active" : "")
-                                                                }
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    this.setTimerConfiguration(x.id);
-                                                                }}
-                                                            >
-                                                                {x.name}
-                                                            </button>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
+                                                <div className="row">
+                                                    {timers.map((x, i) => {
+                                                        return (
+                                                            <div key={i} className="col-auto">
+                                                                <button
+                                                                    className={
+                                                                        "btn btn-default btn-sm mt-3" +
+                                                                        (chosenTimer.name === x.name ? " active" : "")
+                                                                    }
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        this.setTimerConfiguration(x.id);
+                                                                    }}
+                                                                >
+                                                                    {x.name}
+                                                                </button>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
 
-                                            <div
-                                                id="customTimerEdit"
-                                                className={"transition overflow-hidden row mt-5"}
-                                                style={{ maxHeight: isCustom ? " 9999px" : "0px" }}
-                                            >
-                                                <div className="col-12">
-                                                    <div className="row">
-                                                        <div className="col-12">
-                                                            <span className="mb-1"></span>
-                                                            <p>Konstruera din egen timer med hjälp av JSON!</p>
-                                                            <textarea
-                                                                className="w-100"
-                                                                style={{ maxHeight: "43.2rem", minHeight: "21.6rem" }}
-                                                                value={customTimerField}
-                                                                onChange={(e) => {
-                                                                    e.preventDefault();
-                                                                    let value = e.currentTarget.value;
+                                                <div
+                                                    id="customTimerEdit"
+                                                    className={"transition overflow-hidden row"}
+                                                    style={{ maxHeight: isCustom ? " 9999px" : "0px" }}
+                                                >
+                                                    <div className="col-12 mt-3">
+                                                        <div className="row">
+                                                            <div className="col-12">
+                                                                <span></span>
+                                                                <p>Konstruera din egen timer med hjälp av JSON!</p>
+                                                                <textarea
+                                                                    className="w-100 mb-3"
+                                                                    style={{
+                                                                        maxHeight: "43.2rem",
+                                                                        minHeight: "21.6rem",
+                                                                    }}
+                                                                    value={customTimerField}
+                                                                    onChange={(e) => {
+                                                                        e.preventDefault();
+                                                                        let value = e.currentTarget.value;
 
-                                                                    this.setState({
-                                                                        customTimerField: value,
-                                                                    });
-                                                                }}
-                                                            ></textarea>
+                                                                        this.setState({
+                                                                            customTimerField: value,
+                                                                        });
+                                                                    }}
+                                                                ></textarea>
 
-                                                            <button
-                                                                onClick={this.saveCustomTimer}
-                                                                className="btn btn-default btn-sm active mr-2"
-                                                            >
-                                                                Ladda in
-                                                            </button>
-                                                            <button
-                                                                onClick={this.resetCustomTimer}
-                                                                className="btn btn-default btn-sm"
-                                                            >
-                                                                Återställ
-                                                            </button>
+                                                                <button
+                                                                    onClick={this.saveCustomTimer}
+                                                                    className="btn btn-default btn-sm active mr-2"
+                                                                >
+                                                                    Ladda in
+                                                                </button>
+                                                                <button
+                                                                    onClick={this.resetCustomTimer}
+                                                                    className="btn btn-default btn-sm"
+                                                                >
+                                                                    Återställ
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -534,138 +538,143 @@ class Pomo extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div id="information" className="row collapse multi-collapse mt-5">
+                            <div className="row justify-content-center">
                                 <div className="col-12">
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="mb-4">
-                                                <button
-                                                    className="btn btn-text"
-                                                    onClick={this.settings}
-                                                    type="button"
-                                                    data-toggle="collapse"
-                                                    data-target="#information"
-                                                    aria-expanded="false"
-                                                    aria-controls="settings"
-                                                >
-                                                    Om hemsidan
-                                                </button>
-                                                <p>
-                                                    Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
-                                                    <a
-                                                        href="https://fontawesome.com/"
-                                                        rel="noopener noreferrer"
-                                                        target="_blank"
+                                    <div id="information" className="collapse multi-collapse mt-4">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <div className="mb-4">
+                                                    <button
+                                                        className="btn btn-text"
+                                                        onClick={this.settings}
+                                                        type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#information"
+                                                        aria-expanded="false"
+                                                        aria-controls="settings"
                                                     >
-                                                        Font Awesome
-                                                    </a>
-                                                    .
-                                                </p>
-                                            </div>
-                                            <div className="mb-4">
-                                                <label>Kakor</label>
-                                                <p>
-                                                    På denna webbplats används kakor. En kaka är en kort text som lagras
-                                                    i din webbläsare.
-                                                </p>
-                                                <p>
-                                                    Denna webbplats använder Google Analytics för att följa upp trafiken
-                                                    på webbplatsen i syfte att förbättra innehåll, navigation och
-                                                    struktur. Vid första kontakt med webbservern så lagras en cookie i
-                                                    din webbläsare, som sedan läses av webbservern vid varje kontakt.
-                                                    Därmed kan webbservern känna igen din webbläsare.{" "}
-                                                    <a
-                                                        href="http://www.minacookies.se/"
-                                                        rel="noopener noreferrer"
-                                                        target="_blank"
-                                                    >
-                                                        Läs mer om kakor och hur du tar bort dem.
-                                                    </a>
-                                                </p>
-                                                <table style={{ maxWidth: "500px" }}>
-                                                    <caption>Kakor som är väsentliga för appens funktion.</caption>
-                                                    <thead>
-                                                        <tr className="border-bottom">
-                                                            <th className="font-weight-normal">Namn</th>
-                                                            <th className="px-3 font-weight-normal">Utgångstid</th>
-                                                            <th className="font-weight-normal">Beskrivning</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>scookies</td>
-                                                            <td className="px-3">6 månader</td>
-                                                            <td>
-                                                                Används för att underrätta användaren om att kakor
-                                                                används på sidan
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>timer</td>
-                                                            <td className="px-3">6 månader</td>
-                                                            <td>
-                                                                Används för att lagra användarens tillstånd vid
-                                                                användning av timern
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>timer-custom</td>
-                                                            <td className="px-3">6 månader</td>
-                                                            <td>Används för att lagra användarens anpassade timer</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className="mb-4">
-                                                <table style={{ maxWidth: "500px" }}>
-                                                    <caption>
-                                                        Kakor som används för användaranalys,{" "}
+                                                        Om hemsidan
+                                                    </button>
+                                                    <p>
+                                                        Denna hemsidan är byggd i Express & React. Ikonerna är{" "}
                                                         <a
-                                                            href="https://developers.google.com/analytics/devguides/collection/gajs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage"
+                                                            href="https://fontawesome.com/"
                                                             rel="noopener noreferrer"
                                                             target="_blank"
                                                         >
-                                                            Google Analytics
-                                                        </a>{" "}
-                                                        (2021-04-25).{" "}
-                                                        <a
-                                                            href="https://support.google.com/analytics/answer/6004245"
-                                                            rel="noopener noreferrer"
-                                                            target="_blank"
-                                                        >
-                                                            Läs mer
+                                                            Font Awesome
                                                         </a>
-                                                    </caption>
-                                                    <thead>
-                                                        <tr className="border-bottom">
-                                                            <th className="font-weight-normal">Namn</th>
-                                                            <th className="px-3 font-weight-normal">Utgångstid</th>
-                                                            <th className="font-weight-normal">Beskrivning</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>_ga</td>
-                                                            <td className="px-3">2 år</td>
-                                                            <td>
-                                                                Används för att känna igen, och skilja på, användare
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>_gid</td>
-                                                            <td className="px-3">24 timmar</td>
-                                                            <td>
-                                                                Används för att lagra användarens tillstånd vid
-                                                                användning av timern
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{"_ga_<container-id>"}</td>
-                                                            <td className="px-3">2 år</td>
-                                                            <td>Används för att hålla session tillstånd</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                        .
+                                                    </p>
+                                                </div>
+                                                <div className="mb-4" style={{ overflow: "scroll" }}>
+                                                    <label>Kakor</label>
+                                                    <p>
+                                                        På denna webbplats används kakor. En kaka är en kort text som
+                                                        lagras i din webbläsare.
+                                                    </p>
+                                                    <p>
+                                                        Denna webbplats använder Google Analytics för att följa upp
+                                                        trafiken på webbplatsen i syfte att förbättra innehåll,
+                                                        navigation och struktur. Vid första kontakt med webbservern så
+                                                        lagras en cookie i din webbläsare, som sedan läses av
+                                                        webbservern vid varje kontakt. Därmed kan webbservern känna igen
+                                                        din webbläsare.{" "}
+                                                        <a
+                                                            href="http://www.minacookies.se/"
+                                                            rel="noopener noreferrer"
+                                                            target="_blank"
+                                                        >
+                                                            Läs mer om kakor och hur du tar bort dem.
+                                                        </a>
+                                                    </p>
+                                                    <table>
+                                                        <caption>Kakor som är väsentliga för appens funktion.</caption>
+                                                        <thead>
+                                                            <tr className="border-bottom">
+                                                                <th className="font-weight-normal">Namn</th>
+                                                                <th className="px-3 font-weight-normal">Utgångstid</th>
+                                                                <th className="font-weight-normal">Beskrivning</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>scookies</td>
+                                                                <td className="px-3">6 månader</td>
+                                                                <td>
+                                                                    Används för att underrätta användaren om att kakor
+                                                                    används på sidan
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>timer</td>
+                                                                <td className="px-3">6 månader</td>
+                                                                <td>
+                                                                    Används för att lagra användarens tillstånd vid
+                                                                    användning av timern
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>timer-custom</td>
+                                                                <td className="px-3">6 månader</td>
+                                                                <td>
+                                                                    Används för att lagra användarens anpassade timer
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div className="mb-4" style={{ overflow: "scroll" }}>
+                                                    <table>
+                                                        <caption>
+                                                            Kakor som används för användaranalys,{" "}
+                                                            <a
+                                                                href="https://developers.google.com/analytics/devguides/collection/gajs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage"
+                                                                rel="noopener noreferrer"
+                                                                target="_blank"
+                                                            >
+                                                                Google Analytics
+                                                            </a>{" "}
+                                                            (2021-04-25).{" "}
+                                                            <a
+                                                                href="https://support.google.com/analytics/answer/6004245"
+                                                                rel="noopener noreferrer"
+                                                                target="_blank"
+                                                            >
+                                                                Läs mer
+                                                            </a>
+                                                        </caption>
+                                                        <thead>
+                                                            <tr className="border-bottom">
+                                                                <th className="font-weight-normal">Namn</th>
+                                                                <th className="px-3 font-weight-normal">Utgångstid</th>
+                                                                <th className="font-weight-normal">Beskrivning</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>_ga</td>
+                                                                <td className="px-3">2 år</td>
+                                                                <td>
+                                                                    Används för att känna igen, och skilja på, användare
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>_gid</td>
+                                                                <td className="px-3">24 timmar</td>
+                                                                <td>
+                                                                    Används för att lagra användarens tillstånd vid
+                                                                    användning av timern
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{"_ga_<container-id>"}</td>
+                                                                <td className="px-3">2 år</td>
+                                                                <td>Används för att hålla session tillstånd</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

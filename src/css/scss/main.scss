@@ -34,7 +34,6 @@ key {
 
 html {
     font-size: 1rem;
-    color: $text-color;
 }
 
 body {
@@ -84,7 +83,6 @@ body {
         line-height: 6rem;
 
         /*padding-bottom: 4rem;*/
-        width: 500px;
     }
 
     .play {
@@ -103,23 +101,64 @@ body {
         }
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 1200px) {
+    }
+    @media (max-width: 992px) {
         .face {
-            font-size: 4.25rem;
-            line-height: 4.25rem;
+            font-size: 4.75rem;
+            line-height: 4.75rem;
 
             /*padding-bottom: 4rem;*/
-            width: 350px;
         }
 
         .play {
-            height: 3rem;
-            width: 3rem;
+            height: 3.5rem;
+            width: 3.5rem;
 
             svg {
                 float: left;
-                height: 3rem;
-                width: 3rem;
+                height: 3.5rem;
+                width: 3.5rem;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .face {
+            font-size: 3.75rem;
+            line-height: 3.75rem;
+
+            /*padding-bottom: 4rem;*/
+        }
+
+        .play {
+            height: 2.5rem;
+            width: 2.5rem;
+
+            svg {
+                float: left;
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        .face {
+            font-size: 3.25rem;
+            line-height: 3.25rem;
+
+            /*padding-bottom: 4rem;*/
+        }
+
+        .play {
+            height: 2rem;
+            width: 2rem;
+
+            svg {
+                float: left;
+                height: 2rem;
+                width: 2rem;
             }
         }
     }
@@ -377,18 +416,35 @@ span.extrapolate {
 }
 
 #pomo {
-    p {
-        max-width: 500px;
-    }
 }
 @media (max-width: 576px) {
     #pomo {
-        p {
-            max-width: 375px;
-        }
     }
 }
 
 .nav-padding {
     padding: $nav-height 0px;
+}
+
+#wrap-app {
+    width: 525px;
+}
+@media (max-width: 1200px) {
+}
+@media (max-width: 992px) {
+    #wrap-app {
+        width: 425px;
+    }
+}
+
+@media (max-width: 768px) {
+    #wrap-app {
+        width: 345px;
+    }
+}
+
+@media (max-width: 576px) {
+    #wrap-app {
+        width: 300px;
+    }
 }

@@ -89,7 +89,10 @@ Toolbelt-isch
                     <div className="d-flex align-items-center">
                         <IconButton
                             id="play"
-                            className={"play" + (isEnd && started ? " pulse" : "")}
+                            className={
+                                "play d-flex justify-content-center align-items-center " +
+                                (isEnd && started ? " pulse" : "")
+                            }
                             onClick={started && isEnd ? nextPhase : paused ? start : pause}
                         >
                             <FontAwesomeIcon icon={(started && isEnd) || paused ? faPlayCircle : faPauseCircle} />

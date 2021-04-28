@@ -56,7 +56,6 @@ key {
 
 html {
   font-size: 1rem;
-  color: #aaa8ad;
 }
 
 body {
@@ -102,7 +101,6 @@ body {
   font-size: 6rem;
   line-height: 6rem;
   /*padding-bottom: 4rem;*/
-  width: 500px;
 }
 #watch .play {
   margin-top: 2px;
@@ -117,21 +115,52 @@ body {
   height: 4rem;
   width: 4rem;
 }
-@media (max-width: 576px) {
+@media (max-width: 992px) {
   #watch .face {
-    font-size: 4.25rem;
-    line-height: 4.25rem;
+    font-size: 4.75rem;
+    line-height: 4.75rem;
     /*padding-bottom: 4rem;*/
-    width: 350px;
   }
   #watch .play {
-    height: 3rem;
-    width: 3rem;
+    height: 3.5rem;
+    width: 3.5rem;
   }
   #watch .play svg {
     float: left;
-    height: 3rem;
-    width: 3rem;
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+}
+@media (max-width: 768px) {
+  #watch .face {
+    font-size: 3.75rem;
+    line-height: 3.75rem;
+    /*padding-bottom: 4rem;*/
+  }
+  #watch .play {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+  #watch .play svg {
+    float: left;
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+@media (max-width: 576px) {
+  #watch .face {
+    font-size: 3.25rem;
+    line-height: 3.25rem;
+    /*padding-bottom: 4rem;*/
+  }
+  #watch .play {
+    height: 2rem;
+    width: 2rem;
+  }
+  #watch .play svg {
+    float: left;
+    height: 2rem;
+    width: 2rem;
   }
 }
 
@@ -382,17 +411,28 @@ span.extrapolate:hover {
     color: inherit;
   }
 }
-#pomo p {
-  max-width: 500px;
-}
-
-@media (max-width: 576px) {
-  #pomo p {
-    max-width: 375px;
-  }
-}
 .nav-padding {
   padding: 88px 0px;
+}
+
+#wrap-app {
+  width: 525px;
+}
+
+@media (max-width: 992px) {
+  #wrap-app {
+    width: 425px;
+  }
+}
+@media (max-width: 768px) {
+  #wrap-app {
+    width: 345px;
+  }
+}
+@media (max-width: 576px) {
+  #wrap-app {
+    width: 300px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
